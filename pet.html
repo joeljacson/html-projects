@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Pet</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      color: #333;
+    }
+
+    #gameContainer {
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    #petContainer {
+      margin: 20px 0;
+      position: relative;
+    }
+
+    #pet {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      transition: transform 0.5s, opacity 0.5s;
+      background: url('https://via.placeholder.com/200x200?text=Pet') no-repeat center center;
+      background-size: cover;
+    }
+
+    #pet.feeding {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    #pet.playing {
+      transform: rotate(10deg);
+      opacity: 0.8;
+    }
+
+    #pet.sad {
+      opacity: 0.5;
+    }
+
+    #pet.happy {
+      opacity: 1;
+    }
+
+    #mood, #health {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    #happinessBar, #healthBar {
+      height: 20px;
+      width: 100%;
+      background-color: #eee;
+      border-radius: 10px;
+      margin: 10px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #happinessFill, #healthFill {
+      height: 100%;
+      width: 100%;
+      background-color: #76c7c0;
+      border-radius: 10px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: width 0.5s;
+    }
+
+    .controls {
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #timer {
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <h1>Virtual Pet</h1>
+    <div id="petContainer">
+      <div id="pet" class="happy"></div>
+      <div id="mood">Mood: Happy</div>
+      <div id="health">Health: Good</div>
+      <div id="happinessBar"><div id="happinessFill"></div></div>
+      <div id="healthBar"><div id="healthFill"></div></div>
+    </div>
+    <div class="controls">
+      <button id="feedButton">Feed</button>
+      <button id="playButton">Play</button>
+    </div>
+    <div id="timer">Time: 00:00</div>
+  </div>
+
+  <script>
+    let mood = 'Happy';
+    let health = 'Good';
+    let happiness = 100;
+    let healthStatus = 100;
+    let timer;
+    let seconds = 0;
+    const moodElement = document.getElementById('mood');
+    const healthElement = document.getElementById('health');
+    const happinessFill = document.getElementById('happinessFill');
+    const healthFill = document.getElementById('healthFill');
+    const timerElement = document.getElementById('timer');
+
+    const feedSound = new Audio('https://www.myinstants.com/media/sounds/food-crunch.mp3');
+    const playSound = new Audio('https://www.myinstants.com/media/sounds/playful.mp3');
+
+    function startTimer() {
+      timer = setInterval(() => {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const sec = seconds % 60;
+        timerElement.innerText = `Time: ${minutes.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        
+        // Change mood and health over time
+        if (seconds % 10 === 0) {
+          decreaseHappiness();
+          decreaseHealth();
+        }
+      }, 1000);
+    }
+
+    function decreaseHappiness() {
+      happiness -= 5;
+      if (happiness < 0) happiness = 0;
+      updateHappiness();
+    }
+
+    function decreaseHealth() {
+      healthStatus -= 5;
+      if (healthStatus < 0) healthStatus = 0;
+      updateHealth();
+    }
+
+    function updateHappiness() {
+      happinessFill.style.width = happiness + '%';
+      mood = happiness > 50 ? 'Happy' : 'Sad';
+      moodElement.innerText = `Mood: ${mood}`;
+      document.getElementById('pet').classList.toggle('happy', mood === 'Happy');
+      document.getElementById('pet').classList.toggle('sad', mood === 'Sad');
+    }
+
+    function updateHealth() {
+      healthFill.style.width = healthStatus + '%';
+      health = healthStatus > 50 ? 'Good' : 'Bad';
+      healthElement.innerText = `Health: ${health}`;
+    }
+
+    function feedPet() {
+      feedSound.play();
+      happiness = Math.min(happiness + 20, 100);
+      healthStatus = Math.min(healthStatus + 20, 100);
+      updateHappiness();
+      updateHealth();
+      document.getElementById('pet').classList.remove('playing');
+      document.getElementById('pet').classList.add('feeding');
+      setTimeout(() => document.getElementById('pet').classList.remove('feeding'), 500);
+    }
+
+    function playWithPet() {
+      playSound.play();
+      happiness = Math.min(happiness + 15, 100);
+      healthStatus = Math.min(healthStatus + 10, 100);
+      updateHappiness();
+      updateHealth();
+      document.getElementById('pet').classList.remove('feeding');
+      document.getElementById('pet').classList.add('playing');
+      setTimeout(() => document.getElementById('pet').classList.remove('playing'), 500);
+    }
+
+    document.getElementById('feedButton').addEventListener('click', feedPet);
+    document.getElementById('playButton').addEventListener('click', playWithPet);
+
+    startTimer();
+  </script>
+</body>
+</html>

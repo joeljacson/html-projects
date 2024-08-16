@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joel Jacson - Web Developer with expertise in data analytics, cloud computing, and content creation.">
+    <title>Joel Jacson | Personal Bio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            margin: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px 0;
+            margin: 20px 0;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        h2 {
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+        }
+        .profile-pic {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .project {
+            margin-bottom: 20px;
+        }
+        .project a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .project a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+        form input, form textarea, form button {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Joel Jacson</h1>
+            <p>Web Developer | Data Analytics | Cloud Computing | Content Creator</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <img src="image2.jpg" alt="Joel Jacson" class="profile-pic">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>Hello! I'm Joel Jacson, a frontend developer with a passion for machine learning, data science, and cloud computing. With extensive experience in creating engaging user interfaces and seamless user experiences, I specialize in crafting interactive web applications that marry aesthetics with functionality. As a dedicated GitHub contributor, I actively contribute to open-source projects and collaborate with developers worldwide to foster innovation and knowledge-sharing. My journey in technology is driven by a relentless curiosity and a commitment to leveraging cutting-edge tools and techniques to solve complex problems and drive meaningful impact.</p>
+                    <h3>Personal Information</h3>
+                    <ul>
+                        <li><strong>Name:</strong> Joel Jacson</li>
+                        <li><strong>Location:</strong> Chennai</li>
+                        <li><strong>Email:</strong> joel@domain.com</li>
+                        <li><strong>Phone:</strong> +91 234 567 890</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Cloud Computing</li>
+                <li>Machine Learning</li>
+                <li>Data Science</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Task Manager App</h3>
+                <p>A web application for managing tasks. Built using JavaScript.</p>
+                <a href="https://example.com" target="_blank">View Project</a>
+            </div>
+            <div class="project">
+                <h3>Cloud Computing Foundation</h3>
+                <p>A basic foundation in cloud computing with AWS provider.</p>
+                <a href="https://example.com" target="_blank">View Project</a>
+            </div>
+            <div class="project">
+                <h3>Data Analysis Using Machine Learning</h3>
+                <p>Comprehensive analysis using various datasets, ML algorithms, and data science techniques.</p>
+                <a href="https://example.com" target="_blank">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required aria-label="Your Name">
+                <input type="email" id="email" placeholder="Your Email" required aria-label="Your Email">
+                <textarea id="message" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Joel Jacson</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you! Your message has been sent.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
